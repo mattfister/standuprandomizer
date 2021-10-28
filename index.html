@@ -40,9 +40,11 @@
     let devs = ["Andrew", "Matt", "Rifat", "Eric", "Mark", "Daniele", "Shawn" ];
     let others = ["Shivank", "Ankur", "Brianna", "Andrew", "Christine", "Manuel"];
 
-    shuffle(devs);
+    devsClone = [...devs];
 
-    all = devs.concat(others)
+    shuffle(devsClone);
+
+    all = devsClone.concat(others)
 
     all[0] = "<b>" + all[0] + " - Today's Leader </b>"
 
@@ -53,6 +55,17 @@
     text += "</ul>";
     document.getElementById("order").innerHTML = text;
     document.getElementById("today").innerHTML = "Today's Order - " +  (new Date().getMonth()+1) + "/" + new Date().getDate() + "/" + new Date().getFullYear()
+
+    var future = '<h3>The future is revealed:</h3>'
+    for (var i = 1; i <= 100; i++) {
+        Math.seedrandom(fullDaysSinceEpoch+i)
+        date = new Date();
+        date.setDate(date.getDate()+i);
+        devsClone = [...devs]
+        shuffle(devsClone)
+        future += '<div style="opacity:' + (140-i*10)/50 + '"><p>On ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + (date.getFullYear()) + ' the leader will be: ' +  devsClone[0] + '</p></div>'
+    }
+    document.getElementById("nextup").innerHTML = future;
 
 </script>
 
