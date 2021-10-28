@@ -3,7 +3,8 @@
 <head>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Standup</title>
-    </head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+</head>
 <body>
 
 <h1>
@@ -17,31 +18,13 @@
 <p id="order">
 </p>
 
+<p id="nextup">
+</p>
+
 <script>
-    var m_w = 123456789;
-    var m_z = 987654321;
-    var mask = 0xffffffff;
-
-    // Takes any integer
-    function seed(i) {
-        m_w = (123456789 + i) & mask;
-        m_z = (987654321 - i) & mask;
-    }
-
-    // Returns number between 0 (inclusive) and 1.0 (exclusive),
-    // just like Math.random().
-    function random()
-    {
-        m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
-        m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
-        var result = ((m_z << 16) + (m_w & 65535)) >>> 0;
-        result /= 4294967296;
-        return result;
-    }
-
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(random() * (i + 1)); // random index from 0 to i
+        let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
 
         [array[i], array[j]] = [array[j], array[i]];
         }
@@ -50,11 +33,12 @@
     var now = new Date();
     var fullDaysSinceEpoch = Math.floor(now/8.64e7);
 
-    seed(fullDaysSinceEpoch+6)
+    Math.seedrandom(fullDaysSinceEpoch)
+
     console.log(fullDaysSinceEpoch)
 
     let devs = ["Andrew", "Matt", "Rifat", "Eric", "Mark", "Daniele", "Shawn" ];
-    let others = ["Sohan", "Shivank", "Ankur", "Brianna", "Christine", "Manuel"];
+    let others = ["Shivank", "Ankur", "Brianna", "Andrew", "Christine", "Manuel"];
 
     shuffle(devs);
 
@@ -69,6 +53,7 @@
     text += "</ul>";
     document.getElementById("order").innerHTML = text;
     document.getElementById("today").innerHTML = "Today's Order - " +  (new Date().getMonth()+1) + "/" + new Date().getDate() + "/" + new Date().getFullYear()
+
 </script>
 
 </body>
