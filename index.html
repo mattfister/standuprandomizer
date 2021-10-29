@@ -61,9 +61,13 @@
         Math.seedrandom(fullDaysSinceEpoch+i)
         date = new Date();
         date.setDate(date.getDate()+i);
+
         devsClone = [...devs]
         shuffle(devsClone)
-        future += '<div style="opacity:' + (140-i*10)/50 + '"><p>On ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + (date.getFullYear()) + ' the leader will be: ' +  devsClone[0] + '</p></div>'
+        if (date.getDay() == 6 || date.getDay() == 0) {
+            continue;
+        }
+        future += '<div style="opacity:' + (200-i*10)/100 + '"><p>On ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + (date.getFullYear()) + ' the leader will be: ' +  devsClone[0] + '</p></div>'
     }
     document.getElementById("nextup").innerHTML = future;
 
