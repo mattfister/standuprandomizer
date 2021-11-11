@@ -64,7 +64,7 @@
 
         devsClone = [...devs]
         shuffle(devsClone)
-        if (date.getDay() == 6 || date.getDay() == 0) {
+        if (date.getDay() == 5 || date.getDay() == 6 || date.getDay() == 0) {
             continue;
         }
         future += '<div style="opacity:' + (200-i*10)/100 + '"><p>On ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + (date.getFullYear()) + ' the leader will be: ' +  devsClone[0] + '</p></div>'
